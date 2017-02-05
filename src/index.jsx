@@ -5,6 +5,6 @@ import Voting from './components/Voting';
 const pair = ['McDonalds', 'Bobs'];
 
 ReactDOM.render(
-  <Voting pair={pair} winner="McDonalds" />,
+  <Voting pair={pair} />,
   document.getElementById('app')
 );
