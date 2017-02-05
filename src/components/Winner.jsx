@@ -1,10 +1,12 @@
 import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import shallowCompare from 'react-addons-shallow-compare';
 
 
 
 export default React.createClass({
-  mixins: [PureRenderMixin],
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
+  },
   render: function(){
     return <div className="winner">
         Winner is {this.props.winner}!
