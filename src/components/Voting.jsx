@@ -3,6 +3,7 @@ import shallowCompare from 'react-addons-shallow-compare';
 import Winner from './Winner';
 import Vote from './Vote';
 import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
 export const Voting = React.createClass({
   shouldComponentUpdate: function(nextProps, nextState) {
@@ -12,7 +13,7 @@ export const Voting = React.createClass({
     return <div>
     {this.props.winner ?
       <Winner ref="winner" winner={this.props.winner} /> :
-      <Vote pair={this.props.pair} hasVoted={this.props.hasVoted} />}
+      <Vote {...this.props} />}
       </div>;
   }
 });
@@ -25,4 +26,7 @@ function mapStateToProps(state){
   };
 }
 
-export const VotingContainer = connect(mapStateToProps)(Voting);
+export const VotingContainer = connect(
+  mapStateToProps,
+  actionCreators
+)(Voting);

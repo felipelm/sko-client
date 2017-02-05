@@ -1,6 +1,6 @@
 import React from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-
+import classNames from 'classnames';
 
 
 export default React.createClass({
@@ -18,9 +18,9 @@ export default React.createClass({
   },
   render: function(){
     return <div className="voting">
-    {
-      this.getPair().map(entry =>
+    {this.getPair().map(entry =>
       <button key={entry}
+              className={classNames({voted: this.hasVotedFor(entry)})}
               disabled={this.isDisabled()}
               onClick={() => this.props.vote(entry)}>
         <h1>{entry}</h1>

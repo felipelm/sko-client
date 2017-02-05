@@ -23,14 +23,13 @@ describe('Voting', ()=> {
 
   it('invoke callback when button clicked', () => {
     let votedWith;
-    const vote = (entry) => votedWith = entry;
+    function vote(entry) {votedWith = entry;}
 
     const component = renderIntoDocument(
       <Voting pair={["McDonalds", "Bobs"]} vote={vote}/>
     );
 
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
-    // console.log("TODO: fazer funcao vote");
     Simulate.click(buttons[0]);
 
     expect(votedWith).to.equal('McDonalds');
