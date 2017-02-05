@@ -9,7 +9,7 @@ export default React.createClass({
   },
   render: function(){
     return <div className="winner">
-        Winner is {this.props.winner}!
+        Vencedor é {this.props.winner}!
         </div>
   }
 });

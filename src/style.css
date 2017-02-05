@@ -20,7 +20,7 @@ body {
 
 .voting button {
   flex: 1 0 0;
-
+  color: white;
   background-color: #673AB7;
   border-width: 0;
 }
