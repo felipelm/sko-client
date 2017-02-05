@@ -5,6 +5,7 @@ import{
   scryRenderedDOMComponentsWithTag,
   Simulate
 }from 'react-addons-test-utils';
+import {List} from 'immutable';
 import Voting from '../../src/components/Voting';
 import {expect} from 'chai';
 
@@ -68,4 +69,36 @@ describe('Voting', ()=> {
     expect(winner.textContent).to.contain('McDonalds');
   });
 
+  it('renders as pure component', ()=>{
+    const pair = ['McDonalds', 'Bobs'];
+    const container = document.createElement('div');
+    let component = ReactDOM.render(
+      <Voting pair={pair} />,
+      container
+    );
+
+    let firstButton = scryRenderedDOMComponentsWithTag(component,'button')[0];
+    expect(firstButton.textContent).to.equal('McDonalds');
+  });
+
+  it('updates DOM when prop change', ()=>{
+    const pair = List.of('McDonalds', 'Bobs');
+    const container =  document.createElement('div');
+    let component = ReactDOM.render(
+      <Voting pair={pair} />,
+      container
+    );
+
+    let firstButton = scryRenderedDOMComponentsWithTag(component,'button')[0];
+    expect(firstButton.textContent).to.equal('McDonalds');
+
+    const newPair = pair.set(0,'Subway');
+    component = ReactDOM.render(
+      <Voting pair={newPair} />,
+      container
+    )
+
+    firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+    expect(firstButton.textContent).to.equal('Subway');
+  });
 });
