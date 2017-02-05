@@ -4,7 +4,7 @@ import {List} from 'immutable';
 const pair = List.of('McDonalds', 'Bobs');
 
 export default React.createClass({
-  render: funtion(){
-    return React.cloneElement(tis.props.children, {pair: pair});
+  render: function(){
+    return React.cloneElement(this.props.children, {pair: pair});
   }
 });
