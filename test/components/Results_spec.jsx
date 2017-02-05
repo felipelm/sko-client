@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import{
   renderIntoDocument,
-  scryRenderedDOMComponentsWithClass
+  scryRenderedDOMComponentsWithClass,
+  Simulate
 }from 'react-addons-test-utils';
 import{List,Map} from 'immutable';
 import Results from '../../src/components/Results';
@@ -24,4 +26,29 @@ describe('Results', () => {
     expect(bobs).to.contain('0');
 
   });
+
+  it('invokes next callback when button next is clicked', ()=>{
+    let nextInvoked = false;
+    const next = () => nextInvoked = true;
+
+    const pair = List.of('McDonalds', 'Bobs');
+    const component = renderIntoDocument(
+      <Results pair={pair}
+              score={Map()}
+              next={next}/>
+    );
+    Simulate.click(ReactDOM.findDOMNode(component.refs.next));
+    expect(nextInvoked).to.equal(true);
+  });
+
+  it('renders winner', () => {
+    const component = renderIntoDocument(
+      <Results winner="McDonalds"
+                pair={["McDonalds", "Bobs"]}
+                score={Map()} />
+    );
+    const winner = ReactDOM.findDOMNode(component.refs.winner);
+    expect(winner).to.be.ok;
+    expect(winner.textContent).to.contain('McDonalds');
+  })
 });
