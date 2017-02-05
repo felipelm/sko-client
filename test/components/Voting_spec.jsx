@@ -54,6 +54,18 @@ describe('Voting', ()=> {
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
     expect(buttons[0].textContent).to.contain('Voted');
 
-  })
+  });
+
+  it('renders winner', () => {
+    const component = renderIntoDocument(
+      <Voting winner="McDonalds" />
+    );
+    const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
+    expect(buttons.length).to.equal(0);
+
+    const winner = ReactDOM.findDOMNode(component.refs.winner);
+    expect(winner).to.be.ok;
+    expect(winner.textContent).to.contain('McDonalds');
+  });
 
 });
