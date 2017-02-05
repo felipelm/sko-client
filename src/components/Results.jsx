@@ -2,6 +2,7 @@ import React from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import Winner from './Winner';
 import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators'
 
 export const Results = React.createClass({
   shouldComponentUpdate: function(nextProps, nextState) {
@@ -49,4 +50,7 @@ function mapStateToProps(state){
   }
 }
 
-export const ResultsContainer = connect(mapStateToProps)(Results);
+export const ResultsContainer = connect(
+  mapStateToProps,
+  actionCreators
+)(Results);
