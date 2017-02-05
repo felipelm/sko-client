@@ -7,17 +7,15 @@ import {Router, Route, hashHistory} from 'react-router';
 import App from './components/App';
 import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
+import io from 'socket.io-client';
 
 const store = createStore(reducer);
-store.dispatch({
-  type: 'SET_STATE',
-  state: {
-    vote: {
-      pair: ['Pizza Hut', 'Vienna'],
-      score: {Vienna: 2}
-    }
-  }
-})
+
+
+const socket = io(`${location.protocol}//${location.hostname}:8090`);
+socket.on('state', state =>
+  store.dispatch({type: 'SET_STATE', state})
+);
 
 const routes = <Route component={App}>
   <Route path="/results" component={ResultsContainer} />
