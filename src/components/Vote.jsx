@@ -5,7 +5,7 @@ export default React.createClass({
     return this.props.pair || [];
   },
   isDisabled: function(){
-    return !this.props.hasVoted;
+    return this.props.hasVoted;
   },
   hasVotedFor: function(entry){
     return this.props.hasVoted === entry;

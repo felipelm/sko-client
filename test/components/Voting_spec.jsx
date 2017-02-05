@@ -51,7 +51,7 @@ describe('Voting', ()=> {
       <Voting pair={["McDonalds", "Bobs"]}
               hasVoted="McDonalds" />
     );
-    const buttons = scryRenderedDOMComponentsWithTag(component, 'buttons');
+    const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
     expect(buttons[0].textContent).to.contain('Voted');
 
   })
