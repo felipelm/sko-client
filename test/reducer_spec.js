@@ -67,9 +67,10 @@ describe('reducer', ()=> {
     }));
   });
 
-  it('handles VOTE by settting hasVoted', () => {
+  it('handles VOTE by settting myVote', () => {
     const state = fromJS({
       vote: {
+        round:42,
         pair: ['Vienna', 'Bobs'],
         score: {Vienna:1}
       }
@@ -79,16 +80,21 @@ describe('reducer', ()=> {
 
     expect(nextState).to.equal(fromJS({
       vote:{
+        round:42,
         pair: ['Vienna', 'Bobs'],
         score: {Vienna: 1}
       },
-      hasVoted: 'Vienna'
+      myVote: {
+        round: 42,
+        entry: 'Vienna'
+      }
     }));
   });
 
-  it('does not set hasVoted for invalid entry', () => {
+  it('does not set myVote for invalid entry', () => {
     const state = fromJS({
       vote: {
+        round:42,
         pair: ['Vienna', 'Bobs'],
         score: {Vienna:1}
       }
@@ -98,6 +104,7 @@ describe('reducer', ()=> {
 
     expect(nextState).to.equal(fromJS({
       vote:{
+        round:42,
         pair: ['Vienna', 'Bobs'],
         score: {Vienna: 1}
       }
@@ -107,16 +114,21 @@ describe('reducer', ()=> {
   it('removes hasVoted on SET_STATE if pair changes', () => {
     const initialState = fromJS({
       vote: {
+        round:42,
         pair: ['Vienna', 'Bobs'],
         score: {Vienna:1}
       },
-      hasVoted: 'Vienna'
+      myVote: {
+        round: 42,
+        entry: 'Vienna'
+      }
     });
 
     const action = {
       type: 'SET_STATE',
       state: {
         vote: {
+          round:43,
           pair: ['McDonalds', 'Spoletto']
         }
       }
@@ -126,6 +138,7 @@ describe('reducer', ()=> {
 
     expect(nextState).to.equal(fromJS({
       vote: {
+        round: 43,
         pair: ['McDonalds', 'Spoletto']
       }
     }));
