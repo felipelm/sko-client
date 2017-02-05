@@ -1,8 +1,9 @@
 import React from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import Winner from './Winner';
+import {connect} from 'react-redux';
 
-export default React.createClass({
+export const Results = React.createClass({
   shouldComponentUpdate: function(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
   },
@@ -17,7 +18,7 @@ export default React.createClass({
   },
   render: function(){
     return this.props.winner ?
-    <Winner ref="winner" winner={this.props.winner} /> :  
+    <Winner ref="winner" winner={this.props.winner} /> :
     <div className="results">
       <div className="score">
         {this.getPair().map(entry =>
@@ -39,3 +40,13 @@ export default React.createClass({
     </div>;
   }
 });
+
+function mapStateToProps(state){
+  return{
+    pair: state.getIn(['vote', 'pair']),
+    score: state.getIn(['vote', 'score']),
+    winner: state.get('winner')
+  }
+}
+
+export const ResultsContainer = connect(mapStateToProps)(Results);
